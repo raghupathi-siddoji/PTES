@@ -1,0 +1,4 @@
+; Bamcompile project file
+mainfile ap.php
+embed ap.php
+compress

@@ -1,0 +1,102 @@
+ <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+	  <h1>Setting</h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Setting</a></li>
+        <li class="active">Caste</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+     
+  <!------------"Application Form Entry" created: 20 aug 2016 ----------->
+  
+	 <div class="row">
+        <!-- left column -->
+		
+        <div class="col-md-6">
+          <div class="box box-success"><div class="box-header with-border"><h4>Co-Curricular </h4></div>
+            <!-- form start -->
+           <?php echo $this->Form->create('ActivitieSetting',array("url"=>array("controller"=>"Setting","action"=>"activity")));?>
+		   
+              <div class="box-body">
+                <div class="form-group">
+					<div class="row">
+						<div class="col-sm-3"><label>Activitie Name</label></div>
+						<div class="col-sm-5">
+						<?php 
+							echo $this->Form->input('id',array("type"=>"hidden")); 
+							echo $this->Form->input('activity_name',array("type"=>"text","class"=>"form-control","required","label"=>false));?>
+						</div> 
+				   </div>
+                </div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-sm-3"><label>Activitie Code</label></div>
+						<div class="col-sm-5">
+						<?php  
+							echo $this->Form->input('activity_code',array("type"=>"text","class"=>"form-control","required","label"=>false));?>
+						</div>
+						<div class="col-sm-2"><?php echo $this->Form->submit('Save',array("class"=>"btn btn-info"));?></div>
+				   </div>
+                </div>
+				
+              </div>
+            <?php echo $this->Form->end();?>
+			<!---- form end ------>
+          
+		  
+		</div>
+			<?php echo $this->Session->flash(); ?>
+        </div>
+        <!--col (left) -->
+		
+	
+<!--------------Add  Category ---------------->
+	
+        <!-- right column -->
+        <div class="col-md-6">
+		
+		<?php if(!empty($activity_list)) { ?>
+          <div class="box box-warning">
+			  <div class="box-body">
+				<table class="table table-bordered" id="example1">
+				<thead>
+					<tr><th>Sl.No</th><th>Name</th><th>Code</th><th>Delete</th><th>Edit</th></tr>
+				</thead>
+				<?php	$i=1;	
+					foreach($activity_list as $lt) {?>
+					<tr><td><?php echo $i++; ?></td>
+					<td><?php echo $lt['ActivitieSetting']['activity_name'];?></td>
+					<td><?php echo $lt['ActivitieSetting']['activity_code'];?></td>
+					<?php $id=$lt['ActivitieSetting']['id'];?>
+					<td><?php echo $this->Html->link('<i style="font-size:17px;" class="glyphicon glyphicon-trash"></i>'
+						,array("controller"=>"Setting","action"=>"activityDelete", $id),
+						array("confirm"=>"Are you sure you want ro delete???","escape"=>false)); ?></td>	
+					
+					<td><?php echo $this->Html->link('<i style="font-size:17px;" class="glyphicon glyphicon-edit"></i>'
+					,array("controller"=>"Setting","action"=>"activity", $id),
+					array("escape"=>false)); ?></td></tr>
+					<?php } ?> 
+				
+				</table>
+				
+					
+			</div>
+			
+			</div>
+        <?php } else echo "List Empty"; ?>
+		
+		</div>
+		
+      </div>
+      <!-- row -->
+    
+	</section>
+    <!-- content -->
+  </div>
+  <!-- content-wrapper -->
